@@ -1,6 +1,8 @@
 using System;
-using System.Security.Cryptography;
 using System.Text;
+using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
 
 namespace LibP2P.Crypto
 {
@@ -32,17 +34,20 @@ namespace LibP2P.Crypto
             var hmacKeySize = 20;
             var seed = Encoding.UTF8.GetBytes("key expansion");
             var result = new byte[2 * (ivSize + cipherKeySize + hmacKeySize)];
-            var m = HMAC.Create("HMAC" + hashType);
-            m.Key = secret;
-
-            var a = m.ComputeHash(seed);
+            var m = new HMac(DigestUtilities.GetDigest(hashType));
+            m.Init(new KeyParameter(secret));
+            m.BlockUpdate(seed, 0, seed.Length);
+            var a = new byte[m.GetMacSize()];
+            m.DoFinal(a, 0);
 
             var j = 0;
             while (j < result.Length)
             {
-                m.Initialize();
-                m.TransformBlock(a, 0, a.Length, a, 0);
-                var b = m.TransformFinalBlock(seed, 0, seed.Length);
+                m.Reset();
+                m.BlockUpdate(a, 0, a.Length);
+                m.BlockUpdate(seed, 0, seed.Length);
+                var b = new byte[m.GetMacSize()];
+                m.DoFinal(b, 0);
 
                 var todo = b.Length;
 
@@ -53,7 +58,9 @@ namespace LibP2P.Crypto
 
                 j += todo;
 
-                a = m.ComputeHash(a);
+                m.Reset();
+                m.BlockUpdate(a, 0, a.Length);
+                m.DoFinal(a, 0);
             }
 
             var half = result.Length / 2;

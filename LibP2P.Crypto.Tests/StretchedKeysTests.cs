@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 
 namespace LibP2P.Crypto.Tests
@@ -58,6 +54,39 @@ namespace LibP2P.Crypto.Tests
             }
 
             Assert.That(Encoding.UTF8.GetString(decoded), Is.EqualTo(Encoding.UTF8.GetString(raw)));
+        }
+
+        [Test]
+        public void GoInterop()
+        {
+            var k1 = new
+            {
+                iv = new byte[] {208, 132, 203, 169, 253, 52, 40, 83, 161, 91, 17, 71, 33, 136, 67, 96},
+                cipherKey =
+                new byte[]
+                {
+                    156, 48, 241, 157, 92, 248, 153, 186, 114, 127, 195, 114, 106, 104, 215, 133, 35, 11, 131, 137, 123,
+                    70, 74, 26, 15, 60, 189, 32, 67, 221, 115, 137
+                },
+                macKey =
+                new byte[] {6, 179, 91, 245, 224, 56, 153, 120, 77, 140, 29, 5, 15, 213, 187, 65, 137, 230, 202, 120}
+            };
+            var k2 = new
+            {
+                iv = new byte[] { 236, 17, 34, 141, 90, 106, 197, 56, 197, 184, 157, 135, 91, 88, 112, 19 },
+                cipherKey = new byte[] { 151, 145, 195, 219, 76, 195, 102, 109, 187, 231, 100, 150, 132, 245, 251, 130, 254, 37, 178, 55, 227, 34, 114, 39, 238, 34, 2, 193, 107, 130, 32, 87 },
+                macKey = new byte[] { 3, 229, 77, 212, 241, 217, 23, 113, 220, 126, 38, 255, 18, 117, 108, 205, 198, 89, 1, 236 }
+            };
+
+            var keys = StretchedKeys.Generate("AES-256", "SHA256", new byte[] { 195, 191, 209, 165, 209, 201, 127, 122, 136, 111, 31, 66, 111, 68, 38, 155, 216, 204, 46, 181, 200, 188, 170, 204, 104, 74, 239, 251, 173, 114, 222, 234 });
+
+            Assert.That(keys.Item1.IV, Is.EqualTo(k1.iv));
+            Assert.That(keys.Item1.CipherKey, Is.EqualTo(k1.cipherKey));
+            Assert.That(keys.Item1.MacKey, Is.EqualTo(k1.macKey));
+
+            Assert.That(keys.Item2.IV, Is.EqualTo(k2.iv));
+            Assert.That(keys.Item2.CipherKey, Is.EqualTo(k2.cipherKey));
+            Assert.That(keys.Item2.MacKey, Is.EqualTo(k2.macKey));
         }
     }
 }
