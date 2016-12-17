@@ -1,18 +1,23 @@
 ﻿using System;
-using System.Security.Cryptography;
 using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Digests;
-using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
-using Org.BouncyCastle.Crypto.Signers;
 using Org.BouncyCastle.Security;
 
 namespace LibP2P.Crypto
 {
     public class KeyPair
     {
+        /// <summary>
+        /// The Private Key of the Pair
+        /// </summary>
+        /// <returns>Private Key</returns>
         public PrivateKey PrivateKey { get; }
+
+        /// <summary>
+        /// The Public Key of the Pair
+        /// </summary>
+        /// <returns>Public Key</returns>
         public PublicKey PublicKey { get; }
 
         protected KeyPair(PrivateKey privateKey, PublicKey publicKey)
@@ -21,6 +26,12 @@ namespace LibP2P.Crypto
             PublicKey = publicKey;
         }
 
+        /// <summary>
+        /// Generate a new key pair
+        /// </summary>
+        /// <param name="type">Key type</param>
+        /// <param name="bits">Bits (optional)</param>
+        /// <returns>A newly generated key pair</returns>
         public static KeyPair Generate(KeyType type, int? bits = null)
         {
             switch (type)

@@ -7,8 +7,19 @@ namespace LibP2P.Crypto
 {
     public abstract class PublicKey : Key
     {
+        /// <summary>
+        /// Verify the signature of data
+        /// </summary>
+        /// <param name="data">input data</param>
+        /// <param name="signature">signature</param>
+        /// <returns>validity</returns>
         public abstract bool Verify(byte[] data, byte[] signature);
 
+        /// <summary>
+        /// Deserialize a public key from stream
+        /// </summary>
+        /// <param name="stream">input stream</param>
+        /// <returns>public key</returns>
         public static PublicKey Unmarshal(Stream stream)
         {
             var pb = Serializer.Deserialize<PublicKeyContract>(stream);
@@ -23,6 +34,11 @@ namespace LibP2P.Crypto
             }
         }
 
+        /// <summary>
+        /// Deserialize a public key from bytes
+        /// </summary>
+        /// <param name="data">input bytes</param>
+        /// <returns>public key</returns>
         public static PublicKey Unmarshal(byte[] data)
         {
             using (var stream = new MemoryStream(data))
@@ -31,6 +47,10 @@ namespace LibP2P.Crypto
             }
         }
 
+        /// <summary>
+        /// Serialize the public key to bytes
+        /// </summary>
+        /// <returns>serialized bytes</returns>
         public byte[] Marshal() => Utils.MarshalProtoBufContract(new PublicKeyContract { Type = Type, Data = MarshalKey() });
 
         protected abstract byte[] MarshalKey();
