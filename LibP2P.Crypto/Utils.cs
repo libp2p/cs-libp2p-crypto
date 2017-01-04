@@ -4,8 +4,6 @@ using Org.BouncyCastle.Asn1.Pkcs;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509;
-using ProtoBuf;
-using System.IO;
 using Multiformats.Hash;
 using Multiformats.Hash.Algorithms;
 
@@ -72,20 +70,6 @@ namespace LibP2P.Crypto
             var key = new RsaPrivateKeyStructure(p.Modulus, p.PublicExponent, p.Exponent, p.P, p.Q, p.DP, p.DQ, p.QInv);
             var seq = Asn1Sequence.GetInstance(key);
             return seq.GetDerEncoded();
-        }
-
-        /// <summary>
-        /// Convert a Protocol Buffer contract to bytes
-        /// </summary>
-        /// <param name="contract">ProtoBuf contract</param>
-        /// <returns>bytes</returns>
-        public static byte[] MarshalProtoBufContract<T>(T contract)
-        {
-            using (var stream = new MemoryStream())
-            {
-                Serializer.Serialize(stream, contract);
-                return stream.ToArray();
-            }
         }
     }
 }

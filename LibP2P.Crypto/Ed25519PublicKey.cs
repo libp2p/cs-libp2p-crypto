@@ -1,6 +1,4 @@
-using System;
-using System.IO;
-using ProtoBuf;
+using LibP2P.Utilities.Extensions;
 
 namespace LibP2P.Crypto
 {
@@ -18,6 +16,6 @@ namespace LibP2P.Crypto
 
         public override bool Verify(byte[] data, byte[] signature) => Sodium.PublicKeyAuth.VerifyDetached(signature, data, _k);
 
-        protected override byte[] MarshalKey() => Utils.MarshalProtoBufContract(new PublicKeyContract { Type = Type, Data = _k });
+        protected override byte[] MarshalKey() => new PublicKeyContract { Type = Type, Data = _k }.SerializeToBytes();
     }
 }

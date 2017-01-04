@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using LibP2P.Utilities.Extensions;
 using ProtoBuf;
 
 namespace LibP2P.Crypto
@@ -56,7 +57,7 @@ namespace LibP2P.Crypto
         /// Serialize this key to a byte array
         /// </summary>
         /// <returns>serialized bytes</returns>
-        public byte[] Marshal() => Utils.MarshalProtoBufContract(new PrivateKeyContract { Type = Type, Data = MarshalKey() });
+        public byte[] Marshal() => new PrivateKeyContract { Type = Type, Data = MarshalKey() }.SerializeToBytes();
 
         protected abstract byte[] MarshalKey();
     }

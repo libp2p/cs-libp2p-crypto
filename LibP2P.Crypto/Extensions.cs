@@ -1,44 +1,9 @@
-﻿using System;
-using System.Linq;
-using Org.BouncyCastle.Crypto;
+﻿using Org.BouncyCastle.Crypto;
 
 namespace LibP2P.Crypto
 {
     internal static class Extensions
     {
-        /// <summary>
-        /// Get a slice of the byte array
-        /// </summary>
-        /// <param name="bytes">input</param>
-        /// <param name="offset">byte array offset</param>
-        /// <param name="count">number of bytes to slice</param>
-        /// <returns>byte slice</returns>
-        public static byte[] Slice(this byte[] bytes, int offset, int? count = null)
-        {
-            var result = new byte[count ?? bytes.Length - offset];
-            Buffer.BlockCopy(bytes, offset, result, 0, result.Length);
-            return result;
-        }
-
-        /// <summary>
-        /// Append byte arrays to given array
-        /// </summary>
-        /// <param name="bytes">input</param>
-        /// <param name="other">arrays of byte to append</param>
-        /// <returns>byte array of input and given arrays</returns>
-        public static byte[] Append(this byte[] bytes, params byte[][] other)
-        {
-            var result = new byte[bytes.Length + other.Sum(b => b.Length)];
-            Buffer.BlockCopy(bytes, 0, result, 0, bytes.Length);
-            var offset = bytes.Length;
-            foreach (var b in other)
-            {
-                Buffer.BlockCopy(b, 0, result, offset, b.Length);
-                offset += b.Length;
-            }
-            return result;
-        }
-
         /// <summary>
         /// Sign bytes with the given signer
         /// </summary>

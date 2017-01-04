@@ -1,7 +1,5 @@
 using System;
-using System.IO;
-using System.Linq;
-using ProtoBuf;
+using LibP2P.Utilities.Extensions;
 
 namespace LibP2P.Crypto
 {

@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using LibP2P.Utilities.Extensions;
 using Org.BouncyCastle.Crypto.Macs;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;

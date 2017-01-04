@@ -1,7 +1,11 @@
 ﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using LibP2P.Utilities.Extensions;
 using NUnit.Framework;
+using Org.BouncyCastle.Crypto.Macs;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
 
 namespace LibP2P.Crypto.Tests
 {
@@ -9,7 +13,7 @@ namespace LibP2P.Crypto.Tests
     public class StretchedKeysTests
     {
         [Test]
-        public void CanStretchKeys()
+        public void CanStretchKeysUsingBCL()
         {
             var ekeypair1 = EphemeralKeyPair.Generate("P-256");
             var ekeypair2 = EphemeralKeyPair.Generate("P-256");
@@ -53,6 +57,48 @@ namespace LibP2P.Crypto.Tests
                 }
             }
 
+            Assert.That(Encoding.UTF8.GetString(decoded), Is.EqualTo(Encoding.UTF8.GetString(raw)));
+        }
+
+        [TestCase("P-256", "AES-128", "SHA256")]
+        [TestCase("P-256", "AES-256", "SHA256")]
+        [TestCase("curve25519", "AES-256", "SHA256")]
+        [TestCase("P-256", "AES-256", "SHA512")]
+        [TestCase("P-256", "Blowfish", "SHA256")]
+        public void CanStretchKeysUsingBouncyCastle(string curve, string cipher, string hash)
+        {
+            var ekeypair1 = EphemeralKeyPair.Generate(curve);
+            var ekeypair2 = EphemeralKeyPair.Generate(curve);
+            var secret1 = ekeypair1.GenerateSharedKey(ekeypair2.PublicKey);
+            var secret2 = ekeypair2.GenerateSharedKey(ekeypair1.PublicKey);
+            var stretched1 = StretchedKeys.Generate(cipher, hash, secret1);
+            var stretched2 = StretchedKeys.Generate(cipher, hash, secret2);
+
+            var raw = Encoding.UTF8.GetBytes("Hello world, this should be encrypted.");
+            byte[] encoded = null;
+            byte[] decoded = null;
+
+            cipher = cipher.Split('-').First();
+            hash = "HMAC" + hash;
+
+            var cipherKey1 = new ParametersWithIV(ParameterUtilities.CreateKeyParameter(cipher, stretched1.Item1.CipherKey), stretched1.Item1.IV);
+            var cipherKey2 = new ParametersWithIV(ParameterUtilities.CreateKeyParameter(cipher, stretched2.Item1.CipherKey), stretched2.Item1.IV);
+
+            var encryptor = CipherUtilities.GetCipher(cipher + "/CTR/NoPadding");
+            encryptor.Init(true, cipherKey1);
+
+            encoded = encryptor.DoFinal(raw);
+            encoded = encoded.Append(MacUtilities.CalculateMac(hash, new KeyParameter(stretched1.Item1.MacKey), encoded));
+
+            var decryptor = CipherUtilities.GetCipher(cipher + "/CTR/NoPadding");
+            decryptor.Init(false, cipherKey2);
+
+            var mac = MacUtilities.GetMac(hash);
+            mac.Init(new KeyParameter(stretched2.Item1.MacKey));
+            var digest = encoded.Slice(encoded.Length - mac.GetMacSize());
+            Assert.That(MacUtilities.DoFinal(mac, encoded.Slice(0, encoded.Length - digest.Length)), Is.EqualTo(digest));
+
+            decoded = decryptor.DoFinal(encoded, 0, encoded.Length - digest.Length);
             Assert.That(Encoding.UTF8.GetString(decoded), Is.EqualTo(Encoding.UTF8.GetString(raw)));
         }
 
