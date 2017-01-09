@@ -46,8 +46,8 @@
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="LibP2P.IO, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\LibP2P.IO.1.0.3\lib\net461\LibP2P.IO.dll</HintPath>
+    <Reference Include="LibP2P.IO, Version=1.0.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\LibP2P.IO.1.0.4\lib\net461\LibP2P.IO.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="LibP2P.Utilities, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
@@ -74,8 +74,8 @@
       <HintPath>..\packages\SimpleBase.1.2.0\lib\net45\SimpleBase.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sodium, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\libsodium-net.0.9.0\lib\Net40\Sodium.dll</HintPath>
+    <Reference Include="Sodium, Version=0.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\libsodium-net.0.10.0\lib\Net40\Sodium.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
