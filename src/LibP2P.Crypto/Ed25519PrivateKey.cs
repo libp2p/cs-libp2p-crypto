@@ -28,9 +28,8 @@ namespace LibP2P.Crypto
             return new Ed25519PrivateKey(priv, pub);
         }
 
-        public override byte[] Sign(byte[] data) =>  Sodium.PublicKeyAuth.SignDetached(data, _sk);
+        public override byte[] Sign(byte[] data) => Sodium.PublicKeyAuth.SignDetached(data, _sk);
         public override PublicKey GetPublic() => new Ed25519PublicKey(_pk);
-
         protected override byte[] MarshalKey() => _sk.Append(_pk);
     }
 }

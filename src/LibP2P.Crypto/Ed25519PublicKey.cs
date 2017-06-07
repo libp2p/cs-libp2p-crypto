@@ -1,3 +1,4 @@
+using System;
 using LibP2P.Utilities.Extensions;
 
 namespace LibP2P.Crypto
@@ -15,7 +16,6 @@ namespace LibP2P.Crypto
         }
 
         public override bool Verify(byte[] data, byte[] signature) => Sodium.PublicKeyAuth.VerifyDetached(signature, data, _k);
-
         protected override byte[] MarshalKey() => new PublicKeyContract { Type = Type, Data = _k }.SerializeToBytes();
     }
 }
