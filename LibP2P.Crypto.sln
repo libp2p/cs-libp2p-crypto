@@ -1,36 +1,65 @@
-﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibP2P.Crypto", "LibP2P.Crypto\LibP2P.Crypto.csproj", "{D8563E48-CA7B-4BA5-A29C-F3C2FBE60EE8}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{348D2E46-C3F2-4076-8674-D4D8C3B20366}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibP2P.Crypto.Tests", "LibP2P.Crypto.Tests\LibP2P.Crypto.Tests.csproj", "{6C4D37BB-BFE2-4379-8EF8-DD75F0D70252}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibP2P.Crypto", "src\LibP2P.Crypto\LibP2P.Crypto.csproj", "{E7384593-6FCE-4B3A-96A1-76D366D3075D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A0C1AEEA-08C7-4CAD-BC2E-7791F06389AF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0E93AC75-D40E-43A4-81B2-F3A0BFD7A826}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibP2P.Crypto.Tests", "test\LibP2P.Crypto.Tests\LibP2P.Crypto.Tests.csproj", "{581CF3AB-C575-45E4-AF0A-27B798ABE21E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C8FBCB32-9A2F-44CB-A6A8-F3EB0B086554}"
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
+		build.sh = build.sh
 		LICENSE = LICENSE
+		NuGet.config = NuGet.config
 		README.md = README.md
 	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D8563E48-CA7B-4BA5-A29C-F3C2FBE60EE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8563E48-CA7B-4BA5-A29C-F3C2FBE60EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8563E48-CA7B-4BA5-A29C-F3C2FBE60EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8563E48-CA7B-4BA5-A29C-F3C2FBE60EE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6C4D37BB-BFE2-4379-8EF8-DD75F0D70252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6C4D37BB-BFE2-4379-8EF8-DD75F0D70252}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6C4D37BB-BFE2-4379-8EF8-DD75F0D70252}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6C4D37BB-BFE2-4379-8EF8-DD75F0D70252}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Debug|x64.Build.0 = Debug|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Debug|x86.Build.0 = Debug|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Release|x64.ActiveCfg = Release|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Release|x64.Build.0 = Release|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Release|x86.ActiveCfg = Release|Any CPU
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D}.Release|x86.Build.0 = Release|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Debug|x64.Build.0 = Debug|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Debug|x86.Build.0 = Debug|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Release|x64.ActiveCfg = Release|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Release|x64.Build.0 = Release|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Release|x86.ActiveCfg = Release|Any CPU
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E7384593-6FCE-4B3A-96A1-76D366D3075D} = {348D2E46-C3F2-4076-8674-D4D8C3B20366}
+		{581CF3AB-C575-45E4-AF0A-27B798ABE21E} = {0E93AC75-D40E-43A4-81B2-F3A0BFD7A826}
 	EndGlobalSection
 EndGlobal

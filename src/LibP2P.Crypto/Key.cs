@@ -37,5 +37,9 @@ namespace LibP2P.Crypto
         /// <param name="other">Comparand</param>
         /// <returns>equality</returns>
         public bool Equals(Key other) => other != null && Bytes.SequenceEqual(other.Bytes);
+
+        public override bool Equals(object obj) => Equals(obj as Key);
+
+        public override int GetHashCode() => Bytes.Sum(b => b ^ 2);
     }
 }

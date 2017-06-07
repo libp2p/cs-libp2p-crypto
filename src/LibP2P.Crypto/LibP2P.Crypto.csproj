@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard1.6</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;linux-x64</RuntimeIdentifiers>
+    <Description>LibP2P Crypto</Description>
+    <Copyright>Copyright © tabrath 2017</Copyright>
+    <AssemblyTitle>LibP2P.Crypto</AssemblyTitle>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <Authors>tabrath</Authors>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AssemblyName>LibP2P.Crypto</AssemblyName>
+    <PackageId>LibP2P.Crypto</PackageId>
+    <PackageTags>libp2p crypto</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/libp2p/website/0f6f8c7/static/img/favicon.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/libp2p/cs-libp2p-crypto/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/libp2p/cs-libp2p-crypto</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/libp2p/cs-libp2p-crypto</RepositoryUrl>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <OutputType>Library</OutputType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>false</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>$(DefineConstants)</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="LibP2P.Utilities" Version="1.1.0" />
+    <PackageReference Include="Multiformats.Hash" Version="1.2.1" />
+    <PackageReference Include="Sodium.Core" Version="1.0.2" />
+  </ItemGroup>
+</Project>
