@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp1.1</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;linux-x64</RuntimeIdentifiers>
+    <TargetFrameworks>netcoreapp1.1;net461</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;linux-x64;osx-x64</RuntimeIdentifiers>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <AssemblyName>LibP2P.Crypto.Tests</AssemblyName>
     <PackageId>LibP2P.Crypto.Tests</PackageId>
