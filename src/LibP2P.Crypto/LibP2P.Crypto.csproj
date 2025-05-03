@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard1.6</TargetFrameworks>
-    <RuntimeIdentifiers>win7-x64;linux-x64</RuntimeIdentifiers>
+    <TargetFrameworks>netstandard1.6;net461</TargetFrameworks>
+    <RuntimeIdentifiers>win7-x64;linux-x64;osx-x64</RuntimeIdentifiers>
     <Description>LibP2P Crypto</Description>
     <Copyright>Copyright © tabrath 2017</Copyright>
     <AssemblyTitle>LibP2P.Crypto</AssemblyTitle>
@@ -33,6 +33,6 @@
   <ItemGroup>
     <PackageReference Include="LibP2P.Utilities" Version="1.1.0" />
     <PackageReference Include="Multiformats.Hash" Version="1.2.1" />
-    <PackageReference Include="Sodium.Core" Version="1.0.2" />
+    <PackageReference Include="Sodium.Core" Version="1.0.5" />
   </ItemGroup>
 </Project>

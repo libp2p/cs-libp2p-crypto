@@ -13,6 +13,5 @@ export FrameworkPathOverride=$(dirname $(which mono))/../lib/mono/4.5/
 
 dotnet test ./test/LibP2P.Crypto.Tests/LibP2P.Crypto.Tests.csproj -c Release -f netcoreapp1.1
 
-# disabled net461 for now as sodium.core does not work with net461, yet
-#dotnet build ./test/LibP2P.Crypto.Tests/LibP2P.Crypto.Tests.csproj -c Release -f net461
-#mono $HOME/.nuget/packages/xunit.runner.console/2.2.0/tools/xunit.console.exe ./test/LibP2P.Crypto.Tests/bin/Release/net461/LibP2P.Crypto.Tests.dll
+dotnet build ./test/LibP2P.Crypto.Tests/LibP2P.Crypto.Tests.csproj -c Release -f net461
+mono $HOME/.nuget/packages/xunit.runner.console/2.2.0/tools/xunit.console.exe ./test/LibP2P.Crypto.Tests/bin/Release/net461/LibP2P.Crypto.Tests.dll
